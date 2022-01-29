@@ -71,7 +71,8 @@ namespace Game_Project
             rectangle.Draw(spriteBatch);
             triangle.Draw(spriteBatch);
             square.Draw(spriteBatch);
-            spriteBatch.DrawString(overhaul, $"{"To exit the game, press g or start from controller."}", new Vector2(150, 75), Color.Red);
+            spriteBatch.DrawString(overhaul, $"{"To exit the game, press g or start from the controller."}", new Vector2(125, 400), Color.Black);
+            spriteBatch.DrawString(overhaul, $"{"Some soon to be fighter jet game."}", new Vector2(200, 75), Color.Black);
             f16.Draw(gameTime, spriteBatch);
             
             spriteBatch.End();
