@@ -87,21 +87,21 @@ namespace Game_Project
             switch (Direction)
             {
                 case Direction.Left:
-                    Position += new Vector2(-1, 0) * 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    Position += new Vector2(-1, 0) * 200 * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     break;
                 case Direction.Right:
-                    Position += new Vector2(1, 0) * 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    Position += new Vector2(1, 0) * 200 * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     break;
 
                     ///Trying to have start on the left side going straight then straft to the right and stop, then to the left and repeat.
-                    /*
+                    
                 case Direction.Up:
-                    Position += new Vector2(0, 0) * 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    Position += new Vector2(0, 0) * 200 * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     break;
                 case Direction.Up3:
-                    Position += new Vector2(0, 0) * 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    Position += new Vector2(0, 0) * 200 * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     break;
-                    */
+                    
             }
         }
             /// <summary>
