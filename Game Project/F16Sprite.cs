@@ -31,13 +31,13 @@ namespace Game_Project
 
         private Texture2D texture;
 
-        private bool Left;
+        //private bool Left;
 
-        private bool Right;
+        //private bool Right;
 
-        private double animationTimer;
+        //private double animationTimer;
 
-        private short animationFrame = 1;
+        //private short animationFrame = 1;
 
         /// <summary>
         /// The direction of the jet
@@ -121,7 +121,7 @@ namespace Game_Project
             public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
             {
                 //Draw the sprite
-                var source = new Microsoft.Xna.Framework.Rectangle(32, 32, 96, 32);
+                var source = new Microsoft.Xna.Framework.Rectangle(0, 0, 96, 32);
                 spriteBatch.Draw(texture, position, source, Color.Gray);
             }
         }
