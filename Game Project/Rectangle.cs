@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game_Project
 {
-    public class Rectangle1
+    public class Rectangle
     {
         /// <summary>
         /// The game this rectangle is a part of
@@ -33,7 +33,7 @@ namespace Game_Project
         /// </summary>
         /// <param name="game">The game this rectangle belongs in</param>
         /// <param name="color">A color to distinguish this rectangle</param>
-        public Rectangle1(Game game, Color color)
+        public Rectangle(Game game, Color color)
         {
             this.game = game;
             this.color = color;

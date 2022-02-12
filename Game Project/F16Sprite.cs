@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using CollisionExample.Collisions;
+
 
 namespace Game_Project
 {
@@ -16,17 +19,21 @@ namespace Game_Project
     public enum Direction
     {
         Up,
-        Up2,
-        Up3,
         Right,
         Left
     }
 
     public class F16Sprite
     {
+        private GamePadState gamePadState;
+
+        private KeyboardState keyboardState;
+
         private Texture2D texture;
 
-        private double directionTimer;
+        private bool Left;
+
+        private bool Right;
 
         private double animationTimer;
 
@@ -40,7 +47,22 @@ namespace Game_Project
         /// <summary>
         /// The position of the jet
         /// </summary>
-        public Vector2 Position;
+        public Vector2 position = new Vector2(375, 350);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private BoundingRectangle bounds = new BoundingRectangle(new Vector2(375 - 16, 350 - 16), 32, 32);
+
+        /// <summary>
+        /// The bounding volume of the sprite
+        /// </summary>
+        public BoundingRectangle Bounds => bounds;
+
+        /// <summary>
+        /// The color blend with the ghost
+        /// </summary>
+        public Color Color { get; set; } = Color.White;
 
         /// <summary>
         /// Loads the jet sprite texture
@@ -57,52 +79,39 @@ namespace Game_Project
         /// <param name="gameTime">The game time</param>
         public void Update(GameTime gameTime)
         {
-            //Update the direction timer
-            directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            gamePadState = GamePad.GetState(0);
+            keyboardState = Keyboard.GetState();
 
-            //Switch directions every 4 seconds
-            if (directionTimer > 4.0)
+            // Apply the gamepad movement with inverted Y axis
+            position += gamePadState.ThumbSticks.Left * new Vector2(1, -1);
+
+            if (gamePadState.ThumbSticks.Left.X < 0)
             {
-                switch (Direction)
-                {
-                    case Direction.Up:
-                        Direction = Direction.Right;
-                        break;
-                    case Direction.Up2:
-                        Direction = Direction.Up2;
-                        break;
-                    case Direction.Up3:
-                        Direction = Direction.Left;
-                        break;
-                    case Direction.Left:
-                        Direction = Direction.Up;
-                        break;
-                    case Direction.Right:
-                        Direction = Direction.Up3;
-                        break;
-                }
+                Direction = Direction.Left;
+            }
+            else if (gamePadState.ThumbSticks.Left.X > 0)
+            {
+                Direction = Direction.Right;
+            }
+            else
+            {
+                Direction = Direction.Up;
             }
 
-            // Move the bat in the direction it is flying
-            switch (Direction)
+            if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W)) position += new Vector2(0, -1);
+            if (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S)) position += new Vector2(0, 1);
+            if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
             {
-                case Direction.Left:
-                    Position += new Vector2(-1, 0) * 200 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    break;
-                case Direction.Right:
-                    Position += new Vector2(1, 0) * 200 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    break;
-
-                    ///Trying to have start on the left side going straight then straft to the right and stop, then to the left and repeat.
-                    
-                case Direction.Up:
-                    Position += new Vector2(0, 0) * 200 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    break;
-                case Direction.Up3:
-                    Position += new Vector2(0, 0) * 200 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    break;
-                    
+                position += new Vector2(-1, 0);
+                Direction = Direction.Left;
             }
+            if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D))
+            {
+                position += new Vector2(1, 0);
+                Direction = Direction.Right;
+            }
+            bounds.X = position.X - 16;
+            bounds.Y = position.Y - 16;
         }
             /// <summary>
             /// Draws the animated plane sprite
@@ -111,19 +120,9 @@ namespace Game_Project
             /// <param name="spriteBatch">The SpriteBatch to draw with</param>
             public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
             {
-                //Update animation timer
-                animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
-
-                //Update animation frame
-                if (animationTimer > 0.3)
-                {
-                    animationFrame++;
-                    if (animationFrame > 3) animationFrame = 1;
-                    animationTimer -= 0.3;
-                }
                 //Draw the sprite
-                var source = new Rectangle(animationFrame * 32, (int)Direction * 32, 96, 32);
-                spriteBatch.Draw(texture, Position, source, Color.Gray);
+                var source = new Microsoft.Xna.Framework.Rectangle(32, 32, 96, 32);
+                spriteBatch.Draw(texture, position, source, Color.Gray);
             }
         }
     }
