@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace Game_Project
 {
@@ -16,6 +18,8 @@ namespace Game_Project
         private SpriteFont overhaul;
         private f5Sprite[] f5s;
         private int f5planes;
+        private Song backgroundMusic;
+        private SoundEffect planeExploding;
 
         public GameProject()
         {
@@ -57,6 +61,11 @@ namespace Game_Project
             f16.LoadContent(Content);
             foreach (var f5 in f5s) f5.LoadContent(Content);
             overhaul = Content.Load<SpriteFont>("Overhaul");
+            planeExploding = Content.Load<SoundEffect>("PlaneExploding");
+            backgroundMusic = Content.Load<Song>("Jack_Adkins-The_Bomb");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(backgroundMusic);
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -72,6 +81,7 @@ namespace Game_Project
                     f16.Color = Color.Red;
                     f5.touched = true;
                     f5planes--;
+                    planeExploding.Play();
                 }
             }
             // TODO: Add your update logic here
@@ -95,8 +105,8 @@ namespace Game_Project
             //rectangle.Draw(spriteBatch);
             //triangle.Draw(spriteBatch);
             //square.Draw(spriteBatch);
-            spriteBatch.DrawString(overhaul, $"{"To exit the game, press g or start from the controller."}", new Vector2(125, 400), Color.Black);
-            spriteBatch.DrawString(overhaul, $"{"Press W A S D (or number keys) to move the plane"}", new Vector2(150, 75), Color.Black);
+            //spriteBatch.DrawString(overhaul, $"{"To exit the game, press g or start from the controller."}", new Vector2(125, 400), Color.Black);
+            //spriteBatch.DrawString(overhaul, $"{"Press W A S D (or number keys) to move the plane"}", new Vector2(150, 75), Color.Black);
             f16.Draw(gameTime, spriteBatch);
             
             spriteBatch.End();

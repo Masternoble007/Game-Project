@@ -4,5 +4,10 @@ Content/f-5_blank_strip3.png - created by kurohina on OpenGameArg.org (https://o
 
 Content/Bangers/Bangers-Regular.ttf - Overhaul font created by JLH Fonts, released on Public Domain Files (http://www.publicdomainfiles.com/show_file.php?id=13486245242929) Released under public domain
 
+Content/Jack_Adkins-The_Bomb.mp3 - Created by Jack Adkins (https://freemusicarchive.org/music/jack-adkins/single/the-bomb) released under CC-By-NC-SA license
+
 The ball, rectangle, triangle, and square are made my me.
 Also I'm trying to import the file that came with the font, yet causes problems when I try and add it.
+
+Parts of the game architecture is taken from the exercise
+
