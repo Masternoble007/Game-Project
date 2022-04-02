@@ -31,14 +31,6 @@ namespace Game_Project
 
         private Texture2D texture;
 
-        //private bool Left;
-
-        //private bool Right;
-
-        //private double animationTimer;
-
-        //private short animationFrame = 1;
-
         /// <summary>
         /// The direction of the jet
         /// </summary>
@@ -98,6 +90,11 @@ namespace Game_Project
                 Direction = Direction.Up;
             }
 
+            switch (Direction)
+            {
+
+            }
+
             if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W)) position += new Vector2(0, -1);
             if (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S)) position += new Vector2(0, 1);
             if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
@@ -120,9 +117,9 @@ namespace Game_Project
             /// <param name="spriteBatch">The SpriteBatch to draw with</param>
             public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
             {
-                //Draw the sprite
-                var source = new Microsoft.Xna.Framework.Rectangle(0, 0, 96, 32);
-                spriteBatch.Draw(texture, position, source, Color.Gray);
+            //Draw the sprite
+            var source = new Rectangle(0, 0, 96, 32);
+            spriteBatch.Draw(texture, position, source, Color.Gray);
             }
         }
     }

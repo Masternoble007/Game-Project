@@ -25,6 +25,9 @@
 /processorParam:TextureFormat=Color
 /build:ball.png
 
+#begin map.txt
+/copy:map.txt
+
 #begin f-16_blank_strip3.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -115,6 +118,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Square.png
+
+#begin tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:tileset.png
 
 #begin Triangle.png
 /importer:TextureImporter

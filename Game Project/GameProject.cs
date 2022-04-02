@@ -10,16 +10,13 @@ namespace Game_Project
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch spriteBatch;
-        //private Ball ball;
-        //private Rectangle rectangle;
-        //private Triangle triangle;
-        //private Square square;
         private F16Sprite f16;
         private SpriteFont overhaul;
         private f5Sprite[] f5s;
         private int f5planes;
         private Song backgroundMusic;
         private SoundEffect planeExploding;
+        private Tilemap _tilemap;
 
         public GameProject()
         {
@@ -44,6 +41,7 @@ namespace Game_Project
                 new f5Sprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
             };
             f5planes = f5s.Length;
+            _tilemap = new Tilemap("map.txt");
             // TODO: Add your initialization logic here
 
             base.Initialize();
@@ -65,6 +63,7 @@ namespace Game_Project
             backgroundMusic = Content.Load<Song>("Jack_Adkins-The_Bomb");
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(backgroundMusic);
+            _tilemap.LoadContent(Content);
 
         }
 
@@ -108,7 +107,7 @@ namespace Game_Project
             //spriteBatch.DrawString(overhaul, $"{"To exit the game, press g or start from the controller."}", new Vector2(125, 400), Color.Black);
             //spriteBatch.DrawString(overhaul, $"{"Press W A S D (or number keys) to move the plane"}", new Vector2(150, 75), Color.Black);
             f16.Draw(gameTime, spriteBatch);
-            
+            _tilemap.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
             // TODO: Add your drawing code here
